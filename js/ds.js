@@ -238,12 +238,17 @@ clsDs.prototype =
 		if (dsObj.p.DSfocus != undefined) SYSTEMEVENT.setFocus(dsObj);
 	},
 
-	dsdelete : function(dsObjName)
+	dsdelete : function(dsObjName, NoConfirm)
 	{
 		var dsObj = $(dsObjName);
 		if (dsObj.DSpos == -1) return;
-		var c = confirm(LANG.translate("JDS000"));
-		if (c == true)
+		if(!NoConfirm) {
+			var NoConfirm = confirm(LANG.translate("JDS000")) ;
+		}else{
+			var NoConfirm = new Boolean('true') ;
+		}
+
+		if (NoConfirm)
 		{
 			AJAX.loader(true);
 			dsObj.DSchange = false;
